@@ -11,6 +11,6 @@ COPY --from=build /go/src/smtp2tg/main /usr/local/bin/smtp2tg
 RUN apk add ca-certificates --no-cache
 EXPOSE 25
 VOLUME /config
-LABEL org.opencontainers.image.source https://github.com/PaulAnnekov/smtp2tg
+LABEL org.opencontainers.image.source https://github.com/chrisriteco/smtp2tg.git
 
 CMD ["/usr/local/bin/smtp2tg", "-c", "/config/smtp2tg.toml"]
