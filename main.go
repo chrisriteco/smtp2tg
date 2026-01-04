@@ -102,7 +102,7 @@ func main() {
 	// Initialize TG bot
 	bot, err = tgbotapi.NewBotAPI(token)
 	if err != nil {
-		log.Fatal(err.Error())
+		log.Fatal("FATAL NewBotAPI: " + err.Error())
 	}
 	log.Printf("Bot authorized as %s", bot.Self.UserName)
 
@@ -167,6 +167,15 @@ func mailHandler(origin net.Addr, from string, to []string, data []byte) {
 	}
 
 	textMsgs := msg.MessagesContentTypePrefix("text")
+
+	if strings.Contains(string(textMsgs[0].Body), "Face Recognition Clear") {
+        log.Printf("Received mail bevat [Face Recognition Clear]")
+		return
+    } else {
+        log.Printf("Received mail bevat geen [Clear]")
+    }
+
+
 	images := msg.MessagesContentTypePrefix("image")
 	if len(textMsgs) == 0 && len(images) == 0 {
 		log.Printf("mail doesn't contain text or image")
